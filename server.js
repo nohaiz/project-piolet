@@ -5,6 +5,7 @@ const express = require('express');
 const morgan = require('morgan');
 const methodOverride = require('method-override');
 const authContoller = require('./controllers/auth.js');
+const {passUser} = require('./middlewares/auth.js');
 const session = require('express-session');
 
 // DATABASE
@@ -27,9 +28,12 @@ app.use(session({
     saveUninitialized: true,
 }))
 
+app.use(passUser);
+
 // ROUTES
 
 app.get('/', (req, res) => {
+
     res.render('index.ejs');
 })
 app.use('/auth', authContoller);
