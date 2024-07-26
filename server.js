@@ -14,6 +14,7 @@ require('./config/database.js');
 
 // CONTROLLERS
 const authContoller = require('./controllers/auth.js');
+const projectController = require('./controllers/projects/projectRoute.js');
 
 
 // MIDDLEWARE
@@ -25,6 +26,7 @@ app.use(methodOverride('_method'));
 
 // CUSTOM MIDDLEWARE
 const {passUser} = require('./middlewares/auth.js');
+const {managePartials} = require('./middlewares/project.js');
 
 // LOCAL SESSION CREATED
 app.use(session({
@@ -35,14 +37,18 @@ app.use(session({
 
 // GLOBAL LOCAL VAR
 app.use(passUser);
+app.use(managePartials);
 
 // ROUTES
 
-app.get('/', (req, res) => {
+app.get('/', managePartials, (req, res) => {
 
     res.render('index.ejs');
 })
+
+// USING MIDDLEWARE FOR OTHER ROUTES
 app.use('/auth', authContoller);
+app.use('/users/:usersId/projects', projectController);
 
 app.listen('3000');
 

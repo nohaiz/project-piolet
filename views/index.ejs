@@ -18,6 +18,12 @@
                 Users collaborate effortlessly by assigning tasks, leaving comments, attaching files, setting deadlines, and using labels to prioritize and categorize work.
                 Project Piolet's intuitive drag-and-drop interface and extensive customization options make it ideal for managing both personal tasks and complex team projects across different industries.
             </p>
+            <% if (user) { %>
+                <p><a href="/users/<%=user._id%>/projects/new">New Project</a></p>
+                <% if (isNewLinkClicked) { %>
+                    <%-include('partials/projects/new.ejs')%>
+                <% } %>
+            <% } %>
         </section>
     </main>
 </body>
