@@ -7,7 +7,9 @@
 <body>
     <nav>
         <ul>
+            <li><a href="/">Project Piolet</a></li>
             <% if (user) { %>
+                <li>Dashboard</li>
                 <li><a href="/auth/sign-out">Sign Out</a></li>
             <% } else { %>
                     <li><a href="/auth/sign-up">Sign Up</a></li>

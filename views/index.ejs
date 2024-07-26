@@ -19,7 +19,7 @@
                 Project Piolet's intuitive drag-and-drop interface and extensive customization options make it ideal for managing both personal tasks and complex team projects across different industries.
             </p>
             <% if (user) { %>
-                <p><a href="/users/<%=user._id%>/projects/new">New Project</a></p>
+                <p><a href="/users/<%=user._id%>/projects/new">Create Project</a></p>
                 <% if (isNewLinkClicked) { %>
                     <%-include('partials/projects/new.ejs')%>
                 <% } %>

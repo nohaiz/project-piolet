@@ -16,5 +16,7 @@ const projectCtrl =  require('./projectController.js');
 
 router.get('/new', projectCtrl.newProject);
 
+router.post('/', projectCtrl.createProject);
+
 module.exports = router;
 

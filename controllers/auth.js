@@ -48,7 +48,6 @@ router.post('/sign-up', resetError, async (req, res) => {
         const payLoad= {
             username: req.body.username,
             password: hashedPassword,
-            userType: 'admin'
         }
         const user = await User.create(payLoad);
 
