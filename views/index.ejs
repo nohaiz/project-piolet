@@ -3,28 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/home.css">
     <title>Home Page</title>
+    <%-include('partials/nav.ejs')%>
 </head>
 <body>
-    <%-include('partials/nav.ejs')%>
-    <header>Welcome to Project Piolet!</header>
     <main>
+        <!-- LEFT SIDE -->
         <section>
-            <p>
-                Project Piolet is a user-friendly web-based tool designed for organizing tasks and projects with ease and flexibility.
-                It features a visual board-and-list system where tasks are represented as cards that can be seamlessly moved between customizable lists to track progress.
-            </p>
-            <p>
-                Users collaborate effortlessly by assigning tasks, leaving comments, attaching files, setting deadlines, and using labels to prioritize and categorize work.
-                Project Piolet's intuitive drag-and-drop interface and extensive customization options make it ideal for managing both personal tasks and complex team projects across different industries.
-            </p>
+            <div class="section-left">
+                <p>hi</p>
+            </div>
+        </section>
+
+        <!-- MIDDLE -->
+        <section>
+          <h1>Project Piolet</h1>
+          <p>"Project Piolet is a user-friendly web tool for organizing tasks and projects efficiently. It features a visual board system with movable task cards, collaboration tools, and customization options, making it perfect for managing personal tasks or team projects."</p>
             <% if (user) { %>
-                <p><a href="/users/<%=user._id%>/projects/new">Create Project</a></p>
+                <p><a href="/users/<%=user._id%>/projects/new">Project +</a></p>
                 <% if (isNewLinkClicked) { %>
                     <%-include('partials/projects/new.ejs')%>
                 <% } %>
             <% } %>
         </section>
+        
+        <!-- RIGHT SIDE -->
+        <section>
+            <div class="section-right">
+                <p>hi</p>
+            </div>
+        </section>
+
     </main>
 </body>
 </html>

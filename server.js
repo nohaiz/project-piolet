@@ -5,6 +5,7 @@ const express = require('express');
 const morgan = require('morgan');
 const methodOverride = require('method-override');
 const session = require('express-session');
+const path = require('path')
 
 // DATABASE
 
@@ -23,6 +24,9 @@ const app = express();
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride('_method'));
+
+// STYLE SHEET ROUTE/MIDDLEWARE
+app.use(express.static(path.join(__dirname, 'public')))
 
 // CUSTOM MIDDLEWARE
 const {passUser} = require('./middlewares/auth.js');

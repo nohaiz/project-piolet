@@ -5,17 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href="/">Project Piolet</a></li>
+    <nav class="nav-menu">
+        <div class="nav-left">
+            <a href="/">Project Piolet</a>
             <% if (user) { %>
-                <li>Dashboard</li>
-                <li><a href="/auth/sign-out">Sign Out</a></li>
-            <% } else { %>
-                    <li><a href="/auth/sign-up">Sign Up</a></li>
-                    <li><a href="/auth/sign-in">Sign In</a></li>
+                <a href="">Dashboard</a>
             <% } %>
-        </ul>
-    </nav>    
+        </div>
+        <div class="nav-right">
+            <% if (user) { %>
+                <a href="/auth/sign-out">Sign Out</a>
+            <% } else { %>
+                <a href="/auth/sign-up">Sign Up</a>
+                <a href="/auth/sign-in">Sign In</a>
+            <% } %>
+        </div>
+    </nav>
 </body>
 </html>
