@@ -1,5 +1,6 @@
 // MODELS
 
+const { render } = require('ejs');
 const Project = require('../../models/project.js');
 const User = require('../../models/user.js');
 
@@ -21,7 +22,18 @@ const createProject = async (req, res) => {
     }
 }
 
+const indexProject = async (req, res) => {
+    try {
+        const isShowing = true;
+        const userProjs = await Project.find({creator : req.session.user._id});
+        res.render('index.ejs', {userProjs, isShowing});
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 module.exports = {
     newProject,
     createProject,
+    indexProject,
 }

@@ -12,13 +12,20 @@
         <!-- LEFT SIDE -->
         <section>
             <div class="section-left">
-                <p>hi</p>
+                <% if (user) { %>
+                    <p class="view-proj"><a href="/users/<%=user._id%>/projects">Project View</a></p>
+                    <% if (isShowing) { %>
+                        <%-include('partials/projects/index.ejs', {userProjs: userProjs})%>
+                    <% } %>
+                <% } %>
+                <p>This is something u could use for the empty space</p>
             </div>
         </section>
 
         <!-- MIDDLE -->
         <section>
-          <h1>Project Piolet</h1>
+            <div class="section-mid">
+                <h1>Project Piolet</h1>
           <p>"Project Piolet is a user-friendly web tool for organizing tasks and projects efficiently. It features a visual board system with movable task cards, collaboration tools, and customization options, making it perfect for managing personal tasks or team projects."</p>
             <% if (user) { %>
                 <p><a href="/users/<%=user._id%>/projects/new">Project +</a></p>
@@ -26,6 +33,7 @@
                     <%-include('partials/projects/new.ejs')%>
                 <% } %>
             <% } %>
+            </div>
         </section>
         
         <!-- RIGHT SIDE -->
