@@ -9,6 +9,7 @@
         <div class="nav-left">
             <a href="/">Project Piolet</a>
             <% if (user) { %>
+                <a href="/users/<%=user._id%>/projects">Project View</a>
                 <a href="">Dashboard</a>
             <% } %>
         </div>

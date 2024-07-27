@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/home.css">
+    <title>Project Details</title>
+    <%-include('../nav.ejs')%>
+</head>
+<body>
+    <% projectDetails.forEach((proj) => { %>
+        <p><%=proj.title %></p>
+        <p><%=proj.assignedUsers %></p>
+        <p><%=proj%></p>
+        <form action="/users/<%= user._id%>/projects/<%=proj._id%>?_method=DELETE" method="post">
+            <button type="submit">Delete</button>
+        </form>
+    <% }) %> 
+    <a href="">Edit</a>
+</body>
+</html>

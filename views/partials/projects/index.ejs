@@ -6,8 +6,10 @@
 </head>
 <body>
     <div class="section-left-appear">
+        <br><br><br><br><br>
+        <p class="workspace-text">Workspace:</p>
         <% userProjs.forEach((proj) => { %>
-            <a class="section-left-text" href="/users/userId>/projects/<%=proj._id%>"><%= proj.title %></a>
+            <a class="section-left-text" href="/users/<%= user._id%>/projects/<%=proj._id%>"><%= proj.title %></a>
         <% }) %> 
     </div>
 </body>

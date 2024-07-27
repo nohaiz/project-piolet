@@ -13,7 +13,6 @@
         <section>
             <div class="section-left">
                 <% if (user) { %>
-                    <p class="view-proj"><a href="/users/<%=user._id%>/projects">Project View</a></p>
                     <% if (isShowing) { %>
                         <%-include('partials/projects/index.ejs', {userProjs: userProjs})%>
                     <% } %>

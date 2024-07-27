@@ -16,44 +16,83 @@ section {
     justify-content: center;
 }
 .section-left-appear {
-    min-height: 100vh;
     width: 15vw;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    /* justify-content: center; */
     color: #A288E3;
     background-color: #121619;
-    padding-left: 20px;
+    padding-left: 5px;
+    overflow-y: auto; 
+    overflow-x: hidden; 
+    /* margin-top: 70px; */
 }
+
 .section-left-text{
-    display: inline-block; 
-    border-bottom: 2px solid white;
-    padding-bottom: 20px; 
+    display: flex;
+    justify-content: flex-start;
+    padding-bottom: 10px; 
     padding-top: 10px;
-    margin-bottom: 0px; 
-    width: 15vw;
-    color: #94FBAB;
+    padding-left: 15px;
+    color: #A288E3;
     text-decoration: none;
+    border-bottom: 1px solid white;  
 }
-.section-left {
-    
+.section-left-text:hover {
+    background-color: #1E1E24;
+    /* color: #121619; */
+}
+.workspace-text {
+    color: #121619;
+    border-radius: 5px;
+    background-color: #A288E3; 
+    animation: color-change 5s ease-in-out infinite alternate;
+}
+
+@keyframes color-change {
+    0% {
+        background-color: #A288E3; /* Starting color */
+    }
+    50% {
+        background-color: #94FBAB; /* Light green */
+    }
+    100% {
+        background-color: #A288E3; /* Back to starting color */
+    }
 }
 .view-proj{
     position: fixed;
     top: 70px;
     left: 25px;
 }
+.section-mid{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: space-evenly;
+}
+.section-mid > h1 {
+    display: flex;
+    justify-content: center;
+    font-size: 3rem;
+    margin-top: 1.66em;
+}
 p>a {
     color: #A288E3; 
     text-decoration: none; 
     padding: 3px 10px;
+    border: 1px solid;
+    border-radius: 10px;
+    background-color: 1E1E24;
+
 }
 p>a:hover{
     border: 1px solid;
     border-radius: 10px;
     background-color: #94FBAB;
     color:black ;
-    padding: 3px;
+    padding: 3px 10px;
 }
 /* .section-right{
 

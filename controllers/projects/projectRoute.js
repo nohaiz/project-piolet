@@ -12,11 +12,16 @@ const Project = require('../../models/user.js');
 
 const projectCtrl =  require('./projectController.js');
 
+
 // ROUTES
 
 router.get('/', projectCtrl.indexProject);
 
 router.get('/new', projectCtrl.newProject);
+
+router.get('/:projectId', projectCtrl.showProject);
+
+router.delete('/:projectId', projectCtrl.deleteProject);
 
 router.post('/', projectCtrl.createProject);
 

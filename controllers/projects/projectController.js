@@ -1,6 +1,5 @@
 // MODELS
 
-const { render } = require('ejs');
 const Project = require('../../models/project.js');
 const User = require('../../models/user.js');
 
@@ -32,8 +31,29 @@ const indexProject = async (req, res) => {
     }
 }
 
+const showProject = async (req,res) => {
+    try {
+        const projectDetails = await Project.find({_id : req.params.projectId});
+        res.render('partials/projects/show.ejs',{projectDetails});
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+const deleteProject = async(req,res) => {
+    try {
+        const project = await Project.find({_id : req.params.projectId}).deleteOne();
+        res.redirect('/users/user._id/projects');
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
+
 module.exports = {
     newProject,
     createProject,
     indexProject,
+    showProject,
+    deleteProject,
 }
