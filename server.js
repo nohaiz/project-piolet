@@ -28,6 +28,7 @@ app.use(methodOverride('_method'));
 // STYLE SHEET ROUTE/MIDDLEWARE
 app.use(express.static(path.join(__dirname, 'public')))
 
+
 // CUSTOM MIDDLEWARE
 const {passUser} = require('./middlewares/auth.js');
 const {managePartials} = require('./middlewares/project.js');

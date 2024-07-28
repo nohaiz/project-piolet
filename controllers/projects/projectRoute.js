@@ -23,6 +23,8 @@ router.get('/:projectId', projectCtrl.showProject);
 
 router.delete('/:projectId', projectCtrl.deleteProject);
 
+router.get('/:projectId/edit', projectCtrl.editProject);
+
 router.post('/', projectCtrl.createProject);
 
 module.exports = router;

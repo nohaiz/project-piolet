@@ -52,13 +52,13 @@ section {
 
 @keyframes color-change {
     0% {
-        background-color: #A288E3; /* Starting color */
+        background-color: #A288E3; 
     }
     50% {
-        background-color: #94FBAB; /* Light green */
+        background-color: #94FBAB; 
     }
     100% {
-        background-color: #A288E3; /* Back to starting color */
+        background-color: #A288E3; 
     }
 }
 .view-proj{
@@ -69,14 +69,150 @@ section {
 .section-mid{
     display: flex;
     flex-direction: column;
-    height: 100vh;
-    justify-content: space-evenly;
+    min-height: 100vh;
+    justify-content: center;
+}
+.section-mid-p{
+    padding-top: 5px;
+    margin-bottom: 30px;
 }
 .section-mid > h1 {
     display: flex;
     justify-content: center;
     font-size: 3rem;
-    margin-top: 1.66em;
+    /* margin-top: 1.66em; */
+}
+.section-right{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding-top: 10px;
+    margin-top: 20px;
+}
+.section-right-create > form {
+    padding: 15px;
+    width: 25vw; 
+    max-width: 500px; 
+}
+
+.field {
+    width: 100%;
+    margin-bottom: 12px; 
+}
+
+.field > label {
+    font-size: 1rem; 
+    margin-bottom: 4px;
+    margin-top: 12px;
+    display: block;
+}
+
+.field > input,
+.field > select{
+    width: 100%;
+    padding: 2px; 
+    border: 2px solid #A288E3;
+    border-radius: 4px; 
+    background-color: #121619;
+    color: white;
+    font-size: 0.9rem; 
+    box-sizing: border-box;
+}
+
+.field > input:focus,
+.field > select:focus {
+    outline: none;
+    border-color: #94FBAB;
+    box-shadow: 0 0 4px rgba(148, 251, 171, 0.5); 
+}
+.field-p {
+    margin-bottom: 0;
+    font-size: 1.2rem;
+}
+.date-field > p {
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+
+}
+.section-right-create > form > button {
+    font-size: 0.9rem; 
+    padding: 4px 8px; 
+    margin-top: 8px; 
+    cursor: pointer;
+    background-color: #121619;
+}
+
+.section-right-create > form > button[type="submit"] {
+    color: #A288E3; 
+    text-decoration: none; 
+    padding: 3px 10px;
+    border: 1px solid;
+    border-radius: 10px;
+    background-color: 1E1E24;
+
+}
+
+.section-right-create > form > button[type="submit"]:hover {
+    border: 1px solid;
+    border-radius: 10px;
+    background-color: #94FBAB;
+    color:black ;
+    padding: 3px 10px;
+}
+
+.section-right-create > form > button[type="button"] {
+    color: #A288E3; 
+    text-decoration: none; 
+    padding: 3px 10px;
+    border: 1px solid;
+    border-radius: 10px;
+    background-color: 1E1E24;
+}
+
+.section-right-create > form > button[type="button"]:hover {
+    border: 1px solid;
+    border-radius: 10px;
+    background-color: #94FBAB;
+    color:black ;
+    padding: 3px 10px;
+}
+
+.date-field {
+    margin-bottom: 12px; 
+}
+
+.date-field > input {
+    padding: 2px; 
+    border: 2px solid #A288E3;
+    border-radius: 4px; 
+    background-color: #121619;
+    color: white;
+    font-size: 0.9rem; 
+}
+
+.date-field > input:focus {
+    outline: none;
+    border-color: #94FBAB;
+    box-shadow: 0 0 4px rgba(148, 251, 171, 0.5); 
+}
+
+.project-create-link{
+    margin-bottom: 0;
+    margin-top: 0;
+
+}
+#userEntry {
+    height: 200px; 
+    overflow-y: auto; 
+    border: 2px solid #ccc; 
+    padding: 10px; 
+    margin-top: 10px;
+    width:auto;
+}
+#userEntry::-webkit-scrollbar {
+    display: none;
 }
 p>a {
     color: #A288E3; 
@@ -94,9 +230,7 @@ p>a:hover{
     color:black ;
     padding: 3px 10px;
 }
-/* .section-right{
 
-} */
 .nav-menu {
     display: flex;
     justify-content: space-between;

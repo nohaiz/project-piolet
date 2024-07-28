@@ -25,12 +25,9 @@
         <section>
             <div class="section-mid">
                 <h1>Project Piolet</h1>
-          <p>"Project Piolet is a user-friendly web tool for organizing tasks and projects efficiently. It features a visual board system with movable task cards, collaboration tools, and customization options, making it perfect for managing personal tasks or team projects."</p>
+          <p class="section-mid-p">"Project Piolet is a user-friendly web tool for organizing tasks and projects efficiently. It features a visual board system with movable task cards, collaboration tools, and customization options, making it perfect for managing personal tasks or team projects."</p>
             <% if (user) { %>
-                <p><a href="/users/<%=user._id%>/projects/new">Project +</a></p>
-                <% if (isNewLinkClicked) { %>
-                    <%-include('partials/projects/new.ejs')%>
-                <% } %>
+                <p class="project-create-link"><a href="/users/<%=user._id%>/projects/new">Project +</a></p>
             <% } %>
             </div>
         </section>
@@ -38,7 +35,11 @@
         <!-- RIGHT SIDE -->
         <section>
             <div class="section-right">
-                <p>hi</p>
+                <% if (user) { %>
+                    <% if (isNewLinkClicked) { %>
+                        <%-include('partials/projects/new.ejs')%>
+                    <% } %>
+                <% } %>           
             </div>
         </section>
 
