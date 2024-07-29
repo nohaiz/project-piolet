@@ -12,7 +12,6 @@ const Project = require('../../models/user.js');
 
 const projectCtrl =  require('./projectController.js');
 
-
 // ROUTES
 
 router.get('/', projectCtrl.indexProject);

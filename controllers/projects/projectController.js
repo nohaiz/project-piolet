@@ -16,9 +16,9 @@ const createProject = async (req, res) => {
             dueDate : req.body.dueDate,
             assignedUsers: []
         };
-
+        const creator = await User.findById(payLoad.creator);
         if (Array.isArray(req.body.user)) {
-            const validUsers = req.body.user.filter(user => user.trim() !== '');
+            const validUsers = req.body.user.filter(username => username.trim() !== '' && username !== creator.username);
 
             const userChecks = validUsers.map(async (username, index) => {
                 const user = await User.findOne({ username });
@@ -35,7 +35,7 @@ const createProject = async (req, res) => {
             payLoad.assignedUsers = results.filter(result => result !== null);
         } else {
             const username = req.body.user.trim();
-            if (username !== '') {
+            if (username !== '' && username !== creator.username) {
                 const user = await User.findOne({ username });
                 if (user) {
                     payLoad.assignedUsers.push({
@@ -52,25 +52,55 @@ const createProject = async (req, res) => {
     }
 };
 
+let userProjs;
+let isShowing;
+let userAssignedProjects;
 
 const indexProject = async (req, res) => {
     try {
-        const isShowing = true;
-        const userProjs = await Project.find({creator : req.session.user._id});
-        res.render('index.ejs', {userProjs, isShowing});
+        isShowing = true;
+        userProjs = await Project.find({creator : req.session.user._id});
+        const allProjects = await Project.find();
+
+        userAssignedProjects = allProjects.filter(project =>
+            project.assignedUsers.some(user => user.user === req.session.user.username),
+        );
+
+        res.render('index.ejs', {userProjs, isShowing, userAssignedProjects});
+
     } catch (error) {
         console.log(error);
     }
 }
 
-const showProject = async (req,res) => {
+const showProject = async (req, res) => {
     try {
-        const projectDetails = await Project.find({_id : req.params.projectId});
-        res.render('partials/projects/show.ejs',{projectDetails});
+        const projectDetails = await Project.find({ _id: req.params.projectId });        
+        const formatDate = (dateString) => {
+            const date = new Date(dateString);
+            const options = {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: true 
+            };
+            return date.toLocaleString('en-US', options);
+        };
+
+        const formattedProjectDetails = projectDetails.map(project => ({
+            ...project.toObject(),
+            dueDate: formatDate(project.dueDate)
+        }));
+
+        res.render('partials/projects/show.ejs', { projectDetails: formattedProjectDetails, userProjs, isShowing, userAssignedProjects });
     } catch (error) {
         console.log(error);
+        res.status(500).send('An error occurred while fetching project details.');
     }
-}
+};
+
 
 const deleteProject = async (req,res) => {
     try {

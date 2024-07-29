@@ -8,9 +8,13 @@
     <div class="section-left-appear">
         <br><br><br><br><br>
         <p class="workspace-text">Workspace:</p>
-        <% userProjs.forEach((proj) => { %>
-            <a class="section-left-text" href="/users/<%= user._id%>/projects/<%=proj._id%>"><%= proj.title %></a>
-        <% }) %> 
+        <% userProjs.forEach((project) => { %>
+            <a class="section-left-text" href="/users/<%= user._id%>/projects/<%=project._id%>"><%= project.title %></a>
+        <% }) %>
+        <p class="workspace-text">Assigned Projects:</p>
+        <% userAssignedProjects.forEach((project) => { %>
+            <a class="section-left-text" href="/users/<%= user._id%>/projects/<%=project._id%>"><%= project.title %></a>
+        <% }) %>  
     </div>
 </body>
 </html>

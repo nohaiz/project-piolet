@@ -4,18 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/stylesheets/home.css">
+    <link rel="stylesheet" href="/stylesheets/project-show-page.css">
     <title>Project Details</title>
     <%-include('../nav.ejs')%>
 </head>
 <body>
-    <% projectDetails.forEach((proj) => { %>
-        <p><%=proj.title %></p>
-        <p><%=proj.assignedUsers %></p>
-        <p><%=proj%></p>
-        <form action="/users/<%= user._id%>/projects/<%=proj._id%>?_method=DELETE" method="post">
-            <button type="submit">Delete</button>
-        </form>
-    <% }) %> 
-    <a href="">Edit</a>
+    <main>
+        <section class="section-left-reduced">
+            <div class="section-left">
+                <% if (user) { %>
+                    <% if (isShowing) { %>
+                        <%-include('./index.ejs', {userProjs, userAssignedProjects})%>
+                        <% } %>
+                <% } %>
+            </div>
+        </section>
+            <div class="project-details">
+                <% projectDetails.forEach((project) => { %>
+                    <h1>Title: <%=project.title %></h1>
+                    <% project.assignedUsers.forEach((data) => { %>
+                        <p>Users:</p>
+                        <ul>
+                            <li><%=data.user %></li>
+                        </ul>
+                        <p>Roles:</p>
+                        <ul>
+                            <li><%=data.privilege %></li>
+                        </ul>
+                    <% }) %>
+                    <p>Due date:<%=project.dueDate%></p>
+                    <form action="/users/<%= user._id%>/projects/<%=project._id%>?_method=DELETE" method="post">
+                        <button type="submit">Delete</button>
+                    </form>
+                <% }) %> 
+                <a href="">Edit</a>
+            </div>
+        </section>
+        <section>
+            <div class="section-right">
+                
+            </div>
+        </section>
+    </main>
 </body>
 </html>
