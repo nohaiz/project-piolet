@@ -1,11 +1,83 @@
 .project-details {
     display: flex;
     flex-direction: column;
-    background-color: red;
-    margin-left: 10px;
+    align-items: flex-start;
+    background-color: #121619;
+    margin-left: 25px;
     margin-top: 15vh;
+    height: fit-content;
+    border-radius: 20px;
+    padding: 20px;
+    color: white;
+    border: 2px solid white;
 }
 
 .section-left-reduced{
     width: 15vw;
+}
+.project-details .title {
+    font-size: 1.5rem;
+    color: #A288E3;
+    margin-bottom: 10px;
+    border-radius: 20px;
+    border: 1px solid white;
+    background-color: #1E1E24;
+    padding: 5px 10px;
+}
+#date-p {
+    font-size: 0.9rem;
+}
+
+.project-details .date {
+    font-size: 1rem;
+    color: #A288E3;
+    margin: 10px 0;
+}
+.project-details p {
+    font-size: 1rem;
+    color: white;
+    margin: 5px 0;
+}
+.card-buttons {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    
+}
+.project-details form button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin-top: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.project-details form button:hover {
+    background-color: #c82333;
+}
+
+.project-details a.edit-link {
+    display: inline-block;
+    background-color: #007bff;
+    color: white;
+    text-align: center;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-top: 15px;
+    transition: background-color 0.3s ease;
+}
+
+.project-details a.edit-link:hover {
+    background-color: #0056b3;
+    text-decoration: none;
+}
+.link-list {
+    text-decoration: none;
+}
+.link-list:hover{
+    color: #94FBAB;
 }

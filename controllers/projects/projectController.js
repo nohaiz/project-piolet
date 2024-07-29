@@ -64,8 +64,7 @@ const indexProject = async (req, res) => {
 
         userAssignedProjects = allProjects.filter(project =>
             project.assignedUsers.some(user => user.user === req.session.user.username),
-        );
-
+        );        
         res.render('index.ejs', {userProjs, isShowing, userAssignedProjects});
 
     } catch (error) {
@@ -93,7 +92,7 @@ const showProject = async (req, res) => {
             ...project.toObject(),
             dueDate: formatDate(project.dueDate)
         }));
-
+        console.log(projectDetails)
         res.render('partials/projects/show.ejs', { projectDetails: formattedProjectDetails, userProjs, isShowing, userAssignedProjects });
     } catch (error) {
         console.log(error);

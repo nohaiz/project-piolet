@@ -21,23 +21,25 @@
         </section>
             <div class="project-details">
                 <% projectDetails.forEach((project) => { %>
-                    <h1>Title: <%=project.title %></h1>
+                    <p class="title"><%=project.title %></p>
                     <% project.assignedUsers.forEach((data) => { %>
-                        <p>Users:</p>
-                        <ul>
-                            <li><%=data.user %></li>
-                        </ul>
-                        <p>Roles:</p>
-                        <ul>
-                            <li><%=data.privilege %></li>
-                        </ul>
+                        <p><%=data.user %> role: <%=data.privilege %></p>
                     <% }) %>
-                    <p>Due date:<%=project.dueDate%></p>
-                    <form action="/users/<%= user._id%>/projects/<%=project._id%>?_method=DELETE" method="post">
-                        <button type="submit">Delete</button>
-                    </form>
+                    <p class="date">Project Deadline</p>
+                    <p id="date-p"><%=project.dueDate%></p>
+                    <a href="" class="link-list">List +</a>
+
+                    <% if (!project.assignedUsers.some(userObj => 
+                        userObj.user === user.username && ['member', 'observer'].includes(userObj.privilege)
+                    )) { %>
+                        <div class="card-buttons">
+                            <form action="/users/<%= user._id %>/projects/<%= project._id %>?_method=DELETE" method="post">
+                                <button type="submit">Delete</button>
+                            </form>
+                            <a href="#" class="edit-link">Edit</a>
+                        </div>
+                    <% } %>
                 <% }) %> 
-                <a href="">Edit</a>
             </div>
         </section>
         <section>

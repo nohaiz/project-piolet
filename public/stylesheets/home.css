@@ -103,7 +103,7 @@ section {
 }
 
 .field > label {
-    font-size: 1.1rem; 
+    font-size: 1rem; 
     margin-bottom: 4px;
     margin-top: 12px;
     display: block;
@@ -117,8 +117,9 @@ section {
     border-radius: 4px; 
     background-color: #121619;
     color: white;
-    font-size: 0.9rem; 
+    font-size: 1rem; 
     box-sizing: border-box;
+    margin-bottom: 10px;
 }
 
 .field > input:focus,
@@ -204,7 +205,7 @@ section {
 
 }
 #userEntry {
-    height: 200px; 
+    height: 150px; 
     overflow-y: auto; 
     border: 2px solid #ccc; 
     padding: 10px; 
@@ -213,6 +214,9 @@ section {
 }
 #userEntry::-webkit-scrollbar {
     display: none;
+}
+label[for="title"] {
+    font-size: 1.5rem;
 }
 p>a {
     color: #A288E3; 

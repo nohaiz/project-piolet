@@ -1,5 +1,13 @@
 const mongoose = require('mongoose');
-const { validate } = require('./user');
+
+const AssignedUserSchema = mongoose.Schema({
+    user: String,
+    privilege: {
+      type: String,
+      enum: ['admin', 'member', 'observer'],
+      default: 'member', 
+    }
+})
 
 const projectSchema = mongoose.Schema({
   title: {
@@ -14,14 +22,8 @@ const projectSchema = mongoose.Schema({
   dueDate : {
     type: Date,
   },
-  assignedUsers: [{
-    user: String,
-    privilege: {
-      type: String,
-      enum: ['admin', 'member', 'observer'],
-      default: 'member', 
-    }
-  }]
+  assignedUsers : [AssignedUserSchema]
+  
   
 }, { timestamps: true });
 
