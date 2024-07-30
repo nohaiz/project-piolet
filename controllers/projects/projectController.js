@@ -8,6 +8,10 @@ const newProject =  (req, res, next) => {
     res.render('index.ejs',{isNewLinkClicked});
 }
 
+const userEntry = () => {
+
+}
+
 const createProject = async (req, res) => {
     try {
         const payLoad = {
@@ -71,7 +75,7 @@ const indexProject = async (req, res) => {
         console.log(error);
     }
 }
-
+let formattedProjectDetails;
 const showProject = async (req, res) => {
     try {
         const projectDetails = await Project.find({ _id: req.params.projectId });        
@@ -88,18 +92,16 @@ const showProject = async (req, res) => {
             return date.toLocaleString('en-US', options);
         };
 
-        const formattedProjectDetails = projectDetails.map(project => ({
+        formattedProjectDetails = projectDetails.map(project => ({
             ...project.toObject(),
             dueDate: formatDate(project.dueDate)
         }));
-        console.log(projectDetails)
         res.render('partials/projects/show.ejs', { projectDetails: formattedProjectDetails, userProjs, isShowing, userAssignedProjects });
     } catch (error) {
         console.log(error);
         res.status(500).send('An error occurred while fetching project details.');
     }
 };
-
 
 const deleteProject = async (req,res) => {
     try {
@@ -112,7 +114,34 @@ const deleteProject = async (req,res) => {
 }
 
 const editProject = async (req,res) => {
-    res.render('partials/projects/edit.ejs');
+    try {
+        const formatDate = (date) => {
+            if (!date) return '';
+            const d = new Date(date);
+            const year = d.getFullYear();
+            const month = String(d.getMonth() + 1).padStart(2, '0');
+            const day = String(d.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        };
+        const project = await Project.findById(req.params.projectId);
+        const formattedDueDate = formatDate(project.dueDate);
+        const assignee = project.assignedUsers.map(({user,privilege}) => ({[user]: privilege}));
+        res.render('partials/projects/edit.ejs', {project, assignee, formattedDueDate});
+    }catch(error) {
+        console.log(error);
+    }
+}
+const updateProject = async(req,res) => {
+    try {
+        const project = await Project.findByIdAndUpdate(req.params.projectId, req.body, {new:true});
+        console.log(req.body);
+        await project.save();
+        console.log(project);
+    }
+    catch (error) {
+        console.log(error)
+    }
+    res.render('partials/projects/show.ejs', { projectDetails: formattedProjectDetails, userProjs, isShowing, userAssignedProjects });
 }
 
 module.exports = {
@@ -122,4 +151,5 @@ module.exports = {
     showProject,
     deleteProject,
     editProject,
+    updateProject,
 }

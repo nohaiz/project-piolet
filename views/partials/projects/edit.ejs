@@ -3,8 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/home.css">
+    <link rel="stylesheet" href="/stylesheets/project-show-page.css">
+    <title>Project Edit Page</title>
+    <%-include('../nav.ejs')%>
 </head>
 <body>
-    <p>This is the edit page</p>
+    <main style="margin-top: 15px;">
+        <section>
+            <div class="section-left">
+                <% if (user) { %>
+                    <% if (isShowing) { %>
+                        <%-include('partials/projects/index.ejs', {userProjs , userAssignedProjects})%>
+                    <% } %>
+                <% } %>
+            </div>
+        </section>
+        <section>
+            <div class="section-mid">
+                <div class="section-right-create">
+                    <form method="POST" action="/users/<%= user._id%>/projects/<%=project._id%>?_method=PUT">
+            
+                        <div class="field">
+                            <label for="title">Project Title</label>
+                            <input type="text" id="title" name="title" value="<%=project.title%>" required>
+                        </div>
+                        <div class="field date-field">
+                            <p><label for="dueDate">Project Deadline</label></p>
+                            <input type="date" id="dueDate" name="dueDate" value="<%=formattedDueDate%>" required>
+                        </div>
+                        <p class="field-p">Share Board</p>
+                        <div class="field" id="userEntry">
+                            
+                            <% assignee.forEach((project) => { %>
+                                <label for="user">Username:</label>
+                                <input type="text" name="user" id="user" value="<%=Object.keys(project)%>">
+
+                                <% const privilege = Object.values(project)[0] %>
+                                <select name="privilege" required>
+                                    <% if (privilege === 'admin') { %>
+                                        <option value="<%Object.values(project)%>" selected><%=Object.values(project)%></option>
+                                        <option value="observer">observer</option>
+                                        <option value="member">member</option>
+                                    <% } %>
+                                    <% if (privilege === 'observer') { %>
+                                        <option value="admin">admin</option>
+                                        <option value="<%Object.values(project)%>" selected><%=Object.values(project)%></option>
+                                        <option value="member">member</option>
+                                    <% } %>
+                                    <% if (privilege === 'member') { %>
+                                            <option value="admin">admin</option>
+                                            <option value="observer">observer</option>
+                                            <option value="<%Object.values(project)%>" selected><%=Object.values(project)%></option>
+                                    <% } %>
+                                </select>
+                            <% }) %>
+                        </div>
+                        <button type="button" id="addUser">Add User</button>
+                        <button type="submit">Edit Project</button>
+                    </form> 
+                </div>
+            </div>
+        </section>
+
+        <section>
+        </section>
+
+    </main>
 </body>
 </html>
