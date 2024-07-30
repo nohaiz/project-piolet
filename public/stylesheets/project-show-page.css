@@ -41,15 +41,15 @@
 .card-buttons {
     display: flex;
     justify-content: space-evenly;
+    align-items: center;
     width: 100%;
-    
 }
 .project-details form button {
     background-color: #dc3545;
     color: white;
     border: none;
     border-radius: 5px;
-    padding: 5px 10px;
+    padding: 6.9px 10px;
     margin-top: 15px;
     cursor: pointer;
     transition: background-color 0.3s ease;

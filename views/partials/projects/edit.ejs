@@ -40,21 +40,21 @@
                                 <input type="text" name="user" id="user" value="<%=Object.keys(project)%>">
 
                                 <% const privilege = Object.values(project)[0] %>
-                                <select name="privilege" required>
+                                <select name="privilege">
                                     <% if (privilege === 'admin') { %>
-                                        <option value="<%Object.values(project)%>" selected><%=Object.values(project)%></option>
+                                        <option value="<%=privilege%>" selected><%=Object.values(project)%></option>
                                         <option value="observer">observer</option>
                                         <option value="member">member</option>
                                     <% } %>
                                     <% if (privilege === 'observer') { %>
                                         <option value="admin">admin</option>
-                                        <option value="<%Object.values(project)%>" selected><%=Object.values(project)%></option>
+                                        <option value="<%=privilege%>" selected><%=Object.values(project)%></option>
                                         <option value="member">member</option>
                                     <% } %>
                                     <% if (privilege === 'member') { %>
                                             <option value="admin">admin</option>
                                             <option value="observer">observer</option>
-                                            <option value="<%Object.values(project)%>" selected><%=Object.values(project)%></option>
+                                            <option value="<%=privilege%>" selected><%=Object.values(project)%></option>
                                     <% } %>
                                 </select>
                             <% }) %>
@@ -65,10 +65,29 @@
                 </div>
             </div>
         </section>
-
         <section>
         </section>
-
     </main>
+    <script>
+        const addUserButton = document.querySelector('#addUser');
+        addUserButton.addEventListener('click', () => {
+            const userEntry = document.querySelector('#userEntry');
+            const newUserNum = userEntry.querySelectorAll('.field').length + 1;
+
+            const field = document.createElement('div');
+            field.classList.add('field');
+            
+            field.innerHTML = `
+                <label for="user${newUserNum}">Username:</label>
+                <input type="text" id="user${newUserNum}" name="user" >
+                <select name="privilege" >
+                    <option value="admin">Admin</option>
+                    <option value="member" selected>Member</option>
+                    <option value="observer">Observer</option>
+                </select>
+            `;
+            userEntry.appendChild(field);
+        });
+    </script>
 </body>
 </html>

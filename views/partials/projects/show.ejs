@@ -18,29 +18,39 @@
                         <% } %>
                 <% } %>
             </div>
-        </section>
-            <div class="project-details">
-                <% projectDetails.forEach((project) => { %>
-                    <p class="title"><%=project.title %></p>
-                    <% project.assignedUsers.forEach((data) => { %>
-                        <p><%=data.user %> role: <%=data.privilege %></p>
-                    <% }) %>
-                    <p class="date">Project Deadline</p>
-                    <p id="date-p"><%=project.dueDate%></p>
-                    <a href="" class="link-list">List +</a>
+        </section>    
+        <div class="project-details">
 
-                    <% if (!project.assignedUsers.some(userObj => 
-                        userObj.user === user.username && ['member', 'observer'].includes(userObj.privilege)
-                    )) { %>
-                        <div class="card-buttons">
-                            <form action="/users/<%= user._id %>/projects/<%= project._id %>?_method=DELETE" method="post">
-                                <button type="submit">Delete</button>
-                            </form>
-                            <a href="/users/<%= user._id %>/projects/<%= project._id %>/edit" class="edit-link">Edit</a>
-                        </div>
-                    <% } %>
-                <% }) %> 
-            </div>
+            <% const capitalizeFirstLetter = (string) => { %>
+                <% return string.charAt(0).toUpperCase() + string.slice(1); %>
+            <% };%>
+
+            <% projectDetails.forEach((project) => { %>
+                <p class="title"><%= capitalizeFirstLetter(project.title) %></p>
+                <p>Founder: <%= capitalizeFirstLetter(theLord) %></p>
+                <% project.assignedUsers.forEach((data) => { %>
+                    <p><%= capitalizeFirstLetter(data.user) %> <br> Role: <%= capitalizeFirstLetter(data.privilege) %></p>
+                <% }) %>
+                <p class="date">Project Deadline</p>
+                <p id="date-p"><%= capitalizeFirstLetter(project.dueDate) %></p>
+
+                <% if (!project.assignedUsers.some(userObj => 
+                    userObj.user === user.username && ['member', 'observer'].includes(userObj.privilege)
+                )) { %>
+                <a href="" class="link-list">List +</a>
+                <% } %>
+                <% if (!project.assignedUsers.some(userObj => 
+                    userObj.user === user.username && ['observer'].includes(userObj.privilege)
+                )) { %>
+                    <div class="card-buttons">
+                        <form action="/users/<%= user._id %>/projects/<%= project._id %>?_method=DELETE" method="post">
+                            <button type="submit">Delete</button>
+                        </form>
+                        <a href="/users/<%= user._id %>/projects/<%= project._id %>/edit" class="edit-link">Edit</a>
+                    </div>
+                <% } %>
+            <% }) %> 
+        </div>        
         </section>
         <section>
             <div class="section-right">

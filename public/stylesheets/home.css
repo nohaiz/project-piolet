@@ -251,15 +251,22 @@ p>a:hover{
     display: flex;
     gap: 20px;
 }
+.name {
+    padding: 0;
+    margin: 0;
+}
 .nav-right {
     display: flex;
     gap: 20px;
 }
 .nav-left a,
 .nav-right a {
-  color: #A288E3; 
-  text-decoration: none; 
-  padding: 3px 10px;
+    color: #A288E3; 
+    text-decoration: none; 
+    padding: 3px 10px;
+    margin: 1px;
+    border: 1px solid #121619;
+    border-radius: 10px;
 }
 
 .nav-left a:hover,
@@ -268,7 +275,7 @@ p>a:hover{
     border-radius: 10px;
     background-color: #A288E3;
     color:black ;
-    padding: 3px;
+    padding: 3px 10px;
 }
 p {
     display: flex;

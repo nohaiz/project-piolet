@@ -8,9 +8,52 @@ const newProject =  (req, res, next) => {
     res.render('index.ejs',{isNewLinkClicked});
 }
 
-const userEntry = () => {
+const userEntry = async (users, privileges, payLoad, userSession, projectId) => {
+    const project = await Project.findById(projectId);
+    let userCreator;
+    if (project) {
+        userCreator = await User.findById(project.creator);
+    } else {
+        userCreator = userSession;
+    }
 
-}
+    if (Array.isArray(users)) {
+        const userPrivilegeMap = new Map();
+
+        users.forEach((username, index) => {
+            username = username.trim();
+            if (username && username !== userCreator.username) {
+                userPrivilegeMap.set(username, privileges[index]);
+            }
+        });
+
+        const validUsers = Array.from(userPrivilegeMap.keys());
+        const userChecks = validUsers.map(async (username) => {
+            const user = await User.findOne({ username });
+            if (user) {
+                return {
+                    user: username,
+                    privilege: userPrivilegeMap.get(username)
+                };
+            }
+            return null;
+        });
+
+        const results = await Promise.all(userChecks);
+        payLoad.assignedUsers = results.filter(result => result !== null);
+    } else {
+        const username = users.trim();
+        if (username !== '' && username !== userCreator.username) {
+            const user = await User.findOne({ username });
+            if (user) {
+                payLoad.assignedUsers.push({
+                    user: username,
+                    privilege: privileges
+                });
+            }
+        }
+    }
+};
 
 const createProject = async (req, res) => {
     try {
@@ -18,37 +61,14 @@ const createProject = async (req, res) => {
             title: req.body.title,
             creator: req.session.user._id,
             dueDate : req.body.dueDate,
-            assignedUsers: []
+            assignedUsers: [],
         };
-        const creator = await User.findById(payLoad.creator);
-        if (Array.isArray(req.body.user)) {
-            const validUsers = req.body.user.filter(username => username.trim() !== '' && username !== creator.username);
 
-            const userChecks = validUsers.map(async (username, index) => {
-                const user = await User.findOne({ username });
-                if (user) {
-                    return {
-                        user: username,
-                        privilege: req.body.privilege[index]
-                    };
-                }
-                return null;
-            });
+        const users = req.body.user;
+        const privileges = req.body.privilege;
+        const userSession = req.session.user; 
 
-            const results = await Promise.all(userChecks);
-            payLoad.assignedUsers = results.filter(result => result !== null);
-        } else {
-            const username = req.body.user.trim();
-            if (username !== '' && username !== creator.username) {
-                const user = await User.findOne({ username });
-                if (user) {
-                    payLoad.assignedUsers.push({
-                        user: username,
-                        privilege: req.body.privilege
-                    });
-                }
-            }
-        }
+        await userEntry(users, privileges, payLoad, userSession);
         await Project.create(payLoad);
         res.redirect('/');
     } catch (error) {
@@ -75,10 +95,15 @@ const indexProject = async (req, res) => {
         console.log(error);
     }
 }
+
 let formattedProjectDetails;
+
 const showProject = async (req, res) => {
     try {
-        const projectDetails = await Project.find({ _id: req.params.projectId });        
+        const projectDetails = await Project.find({ _id: req.params.projectId });   
+        const projectCreator = await User.findById(projectDetails[0].creator);
+        const theLord = projectCreator.username; 
+
         const formatDate = (dateString) => {
             const date = new Date(dateString);
             const options = {
@@ -96,10 +121,9 @@ const showProject = async (req, res) => {
             ...project.toObject(),
             dueDate: formatDate(project.dueDate)
         }));
-        res.render('partials/projects/show.ejs', { projectDetails: formattedProjectDetails, userProjs, isShowing, userAssignedProjects });
+        res.render('partials/projects/show.ejs', { projectDetails: formattedProjectDetails, userProjs, isShowing, userAssignedProjects, theLord });
     } catch (error) {
         console.log(error);
-        res.status(500).send('An error occurred while fetching project details.');
     }
 };
 
@@ -127,22 +151,33 @@ const editProject = async (req,res) => {
         const formattedDueDate = formatDate(project.dueDate);
         const assignee = project.assignedUsers.map(({user,privilege}) => ({[user]: privilege}));
         res.render('partials/projects/edit.ejs', {project, assignee, formattedDueDate});
-    }catch(error) {
+    }
+    catch(error) {
         console.log(error);
     }
 }
-const updateProject = async(req,res) => {
+const updateProject = async (req, res) => {
     try {
-        const project = await Project.findByIdAndUpdate(req.params.projectId, req.body, {new:true});
-        console.log(req.body);
+        const { title, dueDate, user, privilege } = req.body;
+        const projectId = req.params.projectId;
+        const userSession = req.session.user._id;
+        const updatedPayLoad = {
+            title,
+            dueDate,
+            assignedUsers: []
+        };
+
+        await userEntry(user, privilege ,updatedPayLoad, userSession, projectId);
+
+        const project = await Project.findByIdAndUpdate(projectId, updatedPayLoad, { new: true });
         await project.save();
-        console.log(project);
+        res.redirect(`/users/${req.params.userId}/projects/${req.params.projectId}`);
+
+    } catch (error) {
+        console.log(error);
     }
-    catch (error) {
-        console.log(error)
-    }
-    res.render('partials/projects/show.ejs', { projectDetails: formattedProjectDetails, userProjs, isShowing, userAssignedProjects });
-}
+};
+
 
 module.exports = {
     newProject,
