@@ -97,12 +97,13 @@ const indexProject = async (req, res) => {
 }
 
 let formattedProjectDetails;
+let theLord;
 
 const showProject = async (req, res) => {
     try {
         const projectDetails = await Project.find({ _id: req.params.projectId });   
         const projectCreator = await User.findById(projectDetails[0].creator);
-        const theLord = projectCreator.username; 
+        theLord = projectCreator.username; 
 
         const formatDate = (dateString) => {
             const date = new Date(dateString);
@@ -150,7 +151,7 @@ const editProject = async (req,res) => {
         const project = await Project.findById(req.params.projectId);
         const formattedDueDate = formatDate(project.dueDate);
         const assignee = project.assignedUsers.map(({user,privilege}) => ({[user]: privilege}));
-        res.render('partials/projects/edit.ejs', {project, assignee, formattedDueDate});
+        res.render('partials/projects/edit.ejs', {project, assignee, formattedDueDate, isShowing, userProjs, userAssignedProjects, theLord});
     }
     catch(error) {
         console.log(error);
