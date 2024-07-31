@@ -16,7 +16,7 @@ router.get('/projects/:projectId/lists/new',listController.newList);
 
 // router.get('/:listId', listController.showList);
 
-// router.delete('/:listId', listController.deleteList);
+router.delete('/projects/:projectId/lists/:listId', listController.deleteList);
 
 // router.get('/:listId/edit', listController.editList);
 

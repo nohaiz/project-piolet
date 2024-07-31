@@ -53,28 +53,32 @@
                 </div>
             </div>    
     
-        <section>
-            <div class="section-right">
-                <div class="card-list-display">
+            <section>
+                <div class="section-right">
                     <% projectDetails.forEach((project) => { %>
                         <% let lists = project.lists || []; %> 
-                        <% lists.forEach((listItem) => { %>
-                            <div class="card">
-                                <h3><%= listItem.listTitle %></h3>
-                                <% listItem.listText.forEach((text) => { %>
-                                    <p><%= text %></p>
-                                <% }) %>
-                            </div>
-                        <% }) %>
+                        <div class="card-list-display">
+                            <% lists.forEach((listItem) => { %>
+                                <div class="card">
+                                    <p class="title"><%= listItem.listTitle %></p>
+                                    <% listItem.listText.forEach((text) => { %>
+                                        <div class="text">
+                                            <p><%= text %></p>
+                                        </div>
+                                    <% }) %>
+                                </div>
+                                <div class="buttons">
+                                    <a href="">Edit</a>
+                                    <form action="/users/<%= user._id %>/projects/<%= project._id %>/lists/<%=listItem._id%>?_method=DELETE" method="post" style="display:inline;">
+                                    <button type="submit">Delete</button>
+                                    </form>
+                                </div>
+                            <% }) %>
+                        </div>
                     <% }) %>
-                    <a href="">Edit</a>
-                    <form action="" method="post">
-                        <button type="submit">Delete</button>
-                    </form>
                 </div>
-            </div>
+            </section>
             
-        </section>
     </main>
 </body>
 </html>
