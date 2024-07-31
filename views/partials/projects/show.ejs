@@ -57,12 +57,14 @@
             <div class="section-right">
                 <div class="card-list-display">
                     <% projectDetails.forEach((project) => { %>
-                        <%let list = project.lists || []; %> 
-                        <% list.forEach((listItem) => { %>
-                            <h3><%=listItem.listTitle%></h3>
-                            <% listItem.listText.forEach((text) => { %>
-                                <p><%=text%></p>
-                            <% }) %>
+                        <% let lists = project.lists || []; %> 
+                        <% lists.forEach((listItem) => { %>
+                            <div class="card">
+                                <h3><%= listItem.listTitle %></h3>
+                                <% listItem.listText.forEach((text) => { %>
+                                    <p><%= text %></p>
+                                <% }) %>
+                            </div>
                         <% }) %>
                     <% }) %>
                     <a href="">Edit</a>
@@ -71,6 +73,7 @@
                     </form>
                 </div>
             </div>
+            
         </section>
     </main>
 </body>

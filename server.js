@@ -18,6 +18,10 @@ const authContoller = require('./controllers/auth.js');
 const projectController = require('./controllers/projects/projectRoute.js');
 const listController = require('./controllers/lists/listRoute.js');
 
+// PORT
+
+const port = process.env.PORT ? process.env.PORT : '3000';
+
 
 // MIDDLEWARE
 
@@ -57,5 +61,6 @@ app.use('/users/:usersId',listController);
 app.use('/users/:usersId/projects', projectController);
 app.use('/auth', authContoller);
 
-app.listen('3000');
-
+app.listen(port, () => {
+    console.log(`The express app is ready on port ${port}!`);
+  });
