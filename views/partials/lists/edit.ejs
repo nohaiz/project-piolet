@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/home.css">
+    <link rel="stylesheet" href="/stylesheets/list.css">
+    <title>Edit List</title>
+    <%- include('../nav.ejs') %>
+</head>
+<body>
+    <div class="card">
+        <button type="button" id="createListButton" class="create-list-button">+</button>
+        <h1>Edit this List</h1>
+        <form action="/users/<%= user._id %>/projects/<%= projectId %>/lists/<%= listId%>?_method=PUT" method="post">
+
+            <label for="listTitle">List Title:</label>
+            <input type="text" name="listTitle" id="listTitle" placeholder="Enter list title" required value="<%=lists.listTitle%>">
+
+            <% lists.listText.forEach((text) => { %>
+                <label for="listText">List Description:</label>
+                <input type="text" name="listText" id="listText" placeholder="Enter list description" required value="<%=text%>">
+            <% })%>
+
+            <div id="additionalFields">
+            </div>
+
+            <button type="submit">Edit List</button>
+        </form>
+    </div>
+
+    <script>
+        const createListButton = document.querySelector('#createListButton');
+        const additionalFields = document.querySelector('#additionalFields');
+        let fieldNum = 2; 
+
+        createListButton.addEventListener('click', () => {
+            fieldNum++;
+
+            const field = document.createElement('div');
+            field.classList.add('field');
+
+            field.innerHTML = `
+                <label for="listText">List Description:</label>
+                <input type="text" name="listText" id="listText" placeholder="Enter list description">
+            `;
+
+            additionalFields.appendChild(field);
+        });
+    </script>
+</body>
+</html>

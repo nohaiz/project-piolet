@@ -70,7 +70,7 @@
                                 <div class="buttons">
                                     <% if (project.assignedUsers.some(userObj => userObj.user === user.username && ['observer'].includes(userObj.privilege))) { %>
                                     <% }   else { %>
-                                    <a href="">Edit</a>
+                                    <a href="/users/<%= user._id %>/projects/<%= project._id %>/lists/<%=listItem._id%>/edit">Edit</a>
                                     <form action="/users/<%= user._id %>/projects/<%= project._id %>/lists/<%=listItem._id%>?_method=DELETE" method="post" style="display:inline;">
                                     <button type="submit">Delete</button>
                                     </form>
