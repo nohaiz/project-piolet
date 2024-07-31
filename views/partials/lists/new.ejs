@@ -14,13 +14,10 @@
         <h1>Create a New List</h1>
         <form action="/users/<%= user._id %>/projects/<%= projectId %>/lists" method="post">
             <label for="listTitle">List Title:</label>
-            <input type="text" name="listTitle" id="listTitle" placeholder="Enter list title">
+            <input type="text" name="listTitle" id="listTitle" placeholder="Enter list title" required>
 
             <label for="listText">List Description:</label>
-            <input type="text" name="listText" id="listText" placeholder="Enter list description">
-
-            <label for="listText">List Description:</label>
-            <input type="text" name="listText" id="listText" placeholder="Enter list description">
+            <input type="text" name="listText" id="listText" placeholder="Enter list description" required>
 
             <div id="additionalFields">
             </div>
@@ -32,7 +29,7 @@
     <script>
         const createListButton = document.querySelector('#createListButton');
         const additionalFields = document.querySelector('#additionalFields');
-        let fieldNum = 3; 
+        let fieldNum = 2; 
 
         createListButton.addEventListener('click', () => {
             fieldNum++;

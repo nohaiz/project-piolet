@@ -52,13 +52,13 @@ section {
 
 @keyframes color-change {
     0% {
-        background-color: #A288E3; 
+        background-color: #BBA4E6; 
     }
     50% {
-        background-color: #94FBAB; 
+        background-color: #A288E3; 
     }
     100% {
-        background-color: #A288E3; 
+        background-color: #8C66C0; 
     }
 }
 .view-proj{
