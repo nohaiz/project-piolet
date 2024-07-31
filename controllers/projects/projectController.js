@@ -122,7 +122,12 @@ const showProject = async (req, res) => {
             ...project.toObject(),
             dueDate: formatDate(project.dueDate)
         }));
-        res.render('partials/projects/show.ejs', { projectDetails: formattedProjectDetails, userProjs, isShowing, userAssignedProjects, theLord });
+        res.render('partials/projects/show.ejs', { projectDetails: formattedProjectDetails,
+            userProjs,
+            isShowing,
+            userAssignedProjects,
+            theLord });
+
     } catch (error) {
         console.log(error);
     }
@@ -178,7 +183,6 @@ const updateProject = async (req, res) => {
         console.log(error);
     }
 };
-
 
 module.exports = {
     newProject,

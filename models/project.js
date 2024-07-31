@@ -7,7 +7,13 @@ const AssignedUserSchema = mongoose.Schema({
       enum: ['admin', 'member', 'observer'],
       default: 'member', 
     }
-})
+});
+
+const listSchema = mongoose.Schema({
+    listTitle: String,
+    listText: [String],
+}
+,{ timestamps: true });
 
 const projectSchema = mongoose.Schema({
   title: {
@@ -22,8 +28,9 @@ const projectSchema = mongoose.Schema({
   dueDate : {
     type: Date,
   },
-  assignedUsers : [AssignedUserSchema]
-  
+  assignedUsers : [AssignedUserSchema],
+
+  lists : [listSchema],
   
 }, { timestamps: true });
 

@@ -34,27 +34,37 @@
                 <p class="date">Project Deadline</p>
                 <p id="date-p"><%= capitalizeFirstLetter(project.dueDate) %></p>
 
-                <% if (!project.assignedUsers.some(userObj => 
-                    userObj.user === user.username && ['member', 'observer'].includes(userObj.privilege)
-                )) { %>
-                <a href="" class="link-list">List +</a>
-                <% } %>
-                <% if (!project.assignedUsers.some(userObj => 
-                    userObj.user === user.username && ['observer'].includes(userObj.privilege)
-                )) { %>
+                <% if (project.assignedUsers.some(userObj => userObj.user === user.username && ['member'].includes(userObj.privilege))) { %>
+                <a href="/users/<%= user._id %>/projects/<%= project._id %>/lists/new" class="link-list">List +</a>
+                
+                <% }else if (project.assignedUsers.some(userObj => userObj.user === user.username && ['observer'].includes(userObj.privilege))) { %>
+                
+                <% } else { %>
+                    <a href="/users/<%= user._id %>/projects/<%= project._id %>/lists/new" class="link-list">List +</a>
                     <div class="card-buttons">
+                        <a href="/users/<%= user._id %>/projects/<%= project._id %>/edit" class="edit-link">Edit</a>
                         <form action="/users/<%= user._id %>/projects/<%= project._id %>?_method=DELETE" method="post">
                             <button type="submit">Delete</button>
                         </form>
-                        <a href="/users/<%= user._id %>/projects/<%= project._id %>/edit" class="edit-link">Edit</a>
                     </div>
-                <% } %>
-            <% }) %> 
+                <%}%>
+            <% })%>      
         </div>        
         </section>
         <section>
             <div class="section-right">
-                
+                <% projectDetails.forEach((project) => { %>
+                    <%=console.log(project)%>
+                    <%let list = project.lists || []; %> 
+                    <% list.forEach((listItem) => { %>
+                        <%=listItem.listTitle%>
+                        <% listItem.listText.forEach((text) => { %>
+                            <%=text%>
+                        <% }) %>
+
+                    <% }) %>
+
+                <% }) %>
             </div>
         </section>
     </main>

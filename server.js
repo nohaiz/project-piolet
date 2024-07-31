@@ -16,6 +16,7 @@ require('./config/database.js');
 // CONTROLLERS
 const authContoller = require('./controllers/auth.js');
 const projectController = require('./controllers/projects/projectRoute.js');
+const listController = require('./controllers/lists/listRoute.js');
 
 
 // MIDDLEWARE
@@ -52,8 +53,9 @@ app.get('/', managePartials, (req, res) => {
 })
 
 // USING MIDDLEWARE FOR OTHER ROUTES
-app.use('/auth', authContoller);
+app.use('/users/:usersId',listController);
 app.use('/users/:usersId/projects', projectController);
+app.use('/auth', authContoller);
 
 app.listen('3000');
 
