@@ -35,8 +35,8 @@ https://project-piolet-42d59694e4a9.herokuapp.com
 
 ### **Future Plans**
 
-1. Implement functionality to delete individual cards.
+- Implement functionality to delete individual cards.
 
-2. Enable drag-and-drop capabilities to move cards between lists.
+- Enable drag-and-drop capabilities to move cards between lists.
 
-3. Develop an interactive dashboard for enhanced usability.
+- Develop an interactive dashboard for enhanced usability.
