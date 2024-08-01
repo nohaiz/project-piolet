@@ -34,3 +34,9 @@ https://trello.com/b/QsgfS7GG/projectpiolet
    - **CSS**: For styling web content
 
 ### **Future Plans**
+
+1. Implement functionality to delete individual cards.
+
+2. Enable drag-and-drop capabilities to move cards between lists.
+
+3. Develop an interactive dashboard for enhanced usability.
