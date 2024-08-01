@@ -15,11 +15,11 @@
         <form action="/users/<%= user._id %>/projects/<%= projectId %>/lists/<%= listId%>?_method=PUT" method="post">
 
             <label for="listTitle">List Title:</label>
-            <input type="text" name="listTitle" id="listTitle" placeholder="Enter list title" required value="<%=lists.listTitle%>">
+            <input type="text" name="listTitle" id="listTitle" placeholder="Enter list title" required value="<%=lists.listTitle%>" maxlength="20">
 
             <% lists.listText.forEach((text) => { %>
                 <label for="listText">List Description:</label>
-                <input type="text" name="listText" id="listText" placeholder="Enter list description" required value="<%=text%>">
+                <input type="text" name="listText" id="listText" placeholder="Enter list description" required value="<%=text%>" maxlength="20">
             <% })%>
 
             <div id="additionalFields">

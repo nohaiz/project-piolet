@@ -14,10 +14,10 @@
         <h1>Create a New List</h1>
         <form action="/users/<%= user._id %>/projects/<%= projectId %>/lists" method="post">
             <label for="listTitle">List Title:</label>
-            <input type="text" name="listTitle" id="listTitle" placeholder="Enter list title" required>
+            <input type="text" name="listTitle" id="listTitle" placeholder="Enter list title" required maxlength="20">
 
             <label for="listText">List Description:</label>
-            <input type="text" name="listText" id="listText" placeholder="Enter list description" required>
+            <input type="text" name="listText" id="listText" placeholder="Enter list description" required maxlength="20">
 
             <div id="additionalFields">
             </div>
