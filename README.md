@@ -9,7 +9,7 @@ Users collaborate effortlessly by assigning tasks, leaving comments, attaching f
 https://trello.com/b/QsgfS7GG/projectpiolet
 
 ### **Deployed Link**
-[Need to add a link here]()
+https://project-piolet-42d59694e4a9.herokuapp.com
 
 ### **Technologies Used**
 1. **Framework**:
